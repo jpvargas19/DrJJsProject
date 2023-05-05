@@ -2,16 +2,21 @@
 namespace DrJJsProject.Model
 {
     public class Appointment // Define a new C# class called Appointment
-    {
-        private static int autoIncreament; // Declare a private static integer variable to keep track of appointment IDs
-        public int Id { get; set; } // Declare a public integer property for the appointment ID
-        public DateTime date { get; set; } // Declare a public DateTime property for the appointment date
+    { 
 
-        public Appointment() // Constructor for the Appointment class
+        private static int autoIncrement;
+        public int Id { get; set; }
+        public DateTime date { get; set; }
+
+        public Appointment(int year, int month, int day, int hour, int minute, int second)
         {
-            autoIncreament++; // Increment the static variable autoIncreament
-            Id = autoIncreament; // Set the appointment ID to the current value of autoIncreament
+            DateTime dt1 = new DateTime(year, month, day, hour, minute, second);
+            date = dt1;
+            autoIncrement++;
+            Id = autoIncrement;
         }
+        
+           
     }
 }
 
