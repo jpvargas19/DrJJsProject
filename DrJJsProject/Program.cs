@@ -1,4 +1,5 @@
-﻿using DrJJsProject.Model;
+﻿using System;
+using DrJJsProject.Model;
 //using static DrJJsProject.Model.customerAppointment;
 
 namespace DrJJsProject.Model
@@ -21,7 +22,7 @@ namespace DrJJsProject.Model
         static void Initialize()
         {
             var c1 = new Client
-            {
+            { 
                 FirstName = "Anthony",
                 LastName = "Esposito",
                 Username = "anthonye",
@@ -34,13 +35,9 @@ namespace DrJJsProject.Model
                 Username = "katiet",
                 Password = "2345"
             };
-            var a1 = new Appointment();
-            var a2 = new Appointment();
-            var a3 = new Appointment();
-
-            var ca1 = new CustomerAppointment(c1, a1);
-            var ca2 = new CustomerAppointment(c1, a2);
-            var ca3 = new CustomerAppointment(c2, a3);
+            var a1 = new Appointment(2023, 05, 1, 04, 30, 30);
+            var a2 = new Appointment(2023, 05, 2, 5, 15, 20);
+            var a3 = new Appointment(2023, 06, 15, 6, 30, 50);
 
             customers = new Clients();
             customers.customers.Add(c1);
@@ -51,11 +48,21 @@ namespace DrJJsProject.Model
             appointments.Add(a2);
             appointments.Add(a3);
 
+            var ca1 = new CustomerAppointment(c1, a1);
+            var ca2 = new CustomerAppointment(c1, a2);
+            var ca3 = new CustomerAppointment(c1, a3);
+            var ca4 = new CustomerAppointment(c2, a1);
+            var ca5 = new CustomerAppointment(c2, a2);
+            var ca6 = new CustomerAppointment(c2, a3);
+
             customerAppointments = new List<CustomerAppointment>();
             customerAppointments.Add(ca1);
             customerAppointments.Add(ca2);
             customerAppointments.Add(ca3);
-
+            customerAppointments.Add(ca4);
+            customerAppointments.Add(ca5);
+            customerAppointments.Add(ca6);
+            
 
         }
 
@@ -65,6 +72,7 @@ namespace DrJJsProject.Model
 
             while (!done)
             {
+                Console.WriteLine("Welcome to Dr. JJ's Salon Booking System! Please select an option below.");
                 Console.WriteLine("Options: Login: 1 --- Logout: 2 --- Sign Up: 3 --- Appointments: 4 --- Clear Screen: c --- Quit: q ---");
                 Console.Write("Choice: ");
                 string choice = Console.ReadLine();
@@ -165,22 +173,52 @@ namespace DrJJsProject.Model
 
             var appointmentList = customerAppointments.Where(o => o.client.Username == authenticatedCustomer.Username);
 
+            int appNumber = 0;
+            String app1 = "", app2 = "", app3 = "";
+            String appString = "";
             if (appointmentList.Count() == 0)
             {
                 Console.WriteLine("0 appointment found.");
             }
             else
             {
-                foreach (var appointmnet in appointmentList)
+                foreach (var appointment in appointmentList)
                 {
-                    Console.WriteLine(appointmnet.appointment.date);
+                    appNumber++;
+                    if (appNumber == 1)
+                        app1 = appointment.appointment.date.ToString();
+                    if (appNumber == 2)
+                        app2 = appointment.appointment.date.ToString();
+                    if (appNumber == 3)
+                        app3 = appointment.appointment.date.ToString();
+
+                    appString = appointment.appointment.date.ToString();
+                    Console.WriteLine(appNumber + ": " + appString);
                 }
+                
+            }
+            
+            String choice = "";
+            while (!(choice.Equals("1") || choice.Equals("2") || choice.Equals("3")))
+            {
+                Console.WriteLine("Enter the number of your desired appointment from above.");
+                choice = Console.ReadLine();
+
+
+                if (choice.Equals("1"))
+                {
+                    Console.WriteLine("Appointment booked for " + app1);
+                }
+                else if (choice.Equals("2"))
+                {
+                    Console.WriteLine("Appointment booked for " + app2);
+                }
+                else if (choice.Equals("3"))
+                {
+                    Console.WriteLine("Appointment booked for " + app3);
+                }
+                else Console.WriteLine("Invalid input.");
             }
         }
-
-
-
-
     }
 }
-
