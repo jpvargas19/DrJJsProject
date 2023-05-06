@@ -24,10 +24,10 @@ namespace DrJJsProject.Model
         {
             var c1 = new Client
             { 
-                FirstName = "Anthony",
-                LastName = "Esposito",
-                Username = "anthonye",
-                Password = "1234"
+                FirstName = "Anthony", // Assign a first name
+                LastName = "Esposito", // Assign a last name
+                Username = "anthonye", // Assign a username
+                Password = "1234" // Assign a password
             };
             var c2 = new Client // Create a new client
             {
@@ -36,34 +36,34 @@ namespace DrJJsProject.Model
                 Username = "katiet", // Assign a username
                 Password = "2345" // Assign a password
             };
-            var a1 = new Appointment(2023, 05, 1, 04, 30, 30);
-            var a2 = new Appointment(2023, 05, 2, 5, 15, 20);
-            var a3 = new Appointment(2023, 06, 15, 6, 30, 50);
+            var a1 = new Appointment(2023, 05, 1, 04, 30, 30); // Create a new Appointment object and store it in a variable called "a1".
+            var a2 = new Appointment(2023, 05, 2, 5, 15, 20); // Create a new Appointment object and store it in a variable called "a2".
+            var a3 = new Appointment(2023, 06, 15, 6, 30, 50); // Create a new Appointment object and store it in a variable called "a3".
 
-            customers = new Clients();
-            customers.customers.Add(c1);
-            customers.customers.Add(c2);
+            customers = new Clients(); // Create a new instance of the Clients class
+            customers.customers.Add(c1); // Add c1 created above to its list of customers
+            customers.customers.Add(c2); // Add c2 created above to its list of customers
 
             appointments = new List<Appointment>(); //Initialize the appointments list with the created objects
             appointments.Add(a1); // Add the "a1" instance of the Appointment class to the "appointments" list
             appointments.Add(a2); // Add the "a2" instance of the Appointment class to the "appointments" list
             appointments.Add(a3); // Add the "a3" instance of the Appointment class to the "appointments" list
 
-            var ca1 = new CustomerAppointment(c1, a1);
-            var ca2 = new CustomerAppointment(c1, a2);
-            var ca3 = new CustomerAppointment(c1, a3);
-            var ca4 = new CustomerAppointment(c2, a1);
-            var ca5 = new CustomerAppointment(c2, a2);
-            var ca6 = new CustomerAppointment(c2, a3);
+            var ca1 = new CustomerAppointment(c1, a1); // Create an instance of the CustomerAppointment class with the clients and appointments created above
+            var ca2 = new CustomerAppointment(c1, a2); // Create an instance of the CustomerAppointment class with the clients and appointments created above
+            var ca3 = new CustomerAppointment(c1, a3); // Create an instance of the CustomerAppointment class with the clients and appointments created above
+            var ca4 = new CustomerAppointment(c2, a1); // Create an instance of the CustomerAppointment class with the clients and appointments created above
+            var ca5 = new CustomerAppointment(c2, a2); // Create an instance of the CustomerAppointment class with the clients and appointments created above
+            var ca6 = new CustomerAppointment(c2, a3); // Create an instance of the CustomerAppointment class with the clients and appointments created above
 
-            customerAppointments = new List<CustomerAppointment>();
-            customerAppointments.Add(ca1);
-            customerAppointments.Add(ca2);
-            customerAppointments.Add(ca3);
-            customerAppointments.Add(ca4);
-            customerAppointments.Add(ca5);
-            customerAppointments.Add(ca6);
-            
+            customerAppointments = new List<CustomerAppointment>(); // Initialize a new list of customer appointments
+            customerAppointments.Add(ca1); // Adds one instances of CustomerAppointment objects to the list.
+            customerAppointments.Add(ca2); // Adds one instances of CustomerAppointment objects to the list.
+            customerAppointments.Add(ca3); // Adds one instances of CustomerAppointment objects to the list.
+            customerAppointments.Add(ca4); // Adds one instances of CustomerAppointment objects to the list.
+            customerAppointments.Add(ca5); // Adds one instances of CustomerAppointment objects to the list.
+            customerAppointments.Add(ca6); // Adds one instances of CustomerAppointment objects to the list.
+
 
         }
 
@@ -73,11 +73,11 @@ namespace DrJJsProject.Model
 
             while (!done) // Loop until "done" is true            
             {
-                Console.WriteLine("Welcome to Dr. JJ's Salon Booking System! Please select an option below.");
-                Console.WriteLine("Options: Login: 1 --- Logout: 2 --- Sign Up: 3 --- Appointments: 4 --- Clear Screen: c --- Quit: q ---");
-                Console.Write("Choice: ");
-                string choice = Console.ReadLine();
-                switch (choice)
+                Console.WriteLine("Welcome to Dr. JJ's Salon Booking System! Please select an option below."); // Welcome the user to the program
+                Console.WriteLine("Options: Login: 1 --- Logout: 2 --- Sign Up: 3 --- Appointments: 4 --- Clear Screen: c --- Quit: q ---"); // Display menu options to the user
+                Console.Write("Choice: "); // Prompt the user to enter a choice
+                string choice = Console.ReadLine(); // Prompt the user to enter their choice
+                switch (choice) // Evaluating the value of the "choice" variable
                 {
                     case "1": // If the user's choice is "1"...
                         LoginMenu(); // Call the LoginMenu() function 
@@ -174,51 +174,52 @@ namespace DrJJsProject.Model
 
             var appointmentList = customerAppointments.Where(o => o.client.Username == authenticatedCustomer.Username); // Gets a list of appointments for the current customer
 
-            int appNumber = 0;
-            String app1 = "", app2 = "", app3 = "";
-            String appString = "";
-            if (appointmentList.Count() == 0)
+            int appNumber = 0; // Initialize an integer variable called "appNumber" to 0.
+            String app1 = "", app2 = "", app3 = ""; // Initialize three string variables called "app1", "app2", and "app3" to empty strings.
+            String appString = ""; // Initialize a string variable called "appString" to an empty string.
+            if (appointmentList.Count() == 0) // Check if the number of elements in the appointmentList is equal to 0.
             {
                 Console.WriteLine("0 appointment found."); // Lets the user know that there aren't any appointment found
             }
             else // If appointments were found, displays each appointment's date
             {
-                foreach (var appointment in appointmentList)
+                foreach (var appointment in appointmentList) // Begin a foreach loop that will iterate through each appointment in the appointmentList.
                 {
-                    appNumber++;
-                    if (appNumber == 1)
-                        app1 = appointment.appointment.date.ToString();
-                    if (appNumber == 2)
-                        app2 = appointment.appointment.date.ToString();
-                    if (appNumber == 3)
-                        app3 = appointment.appointment.date.ToString();
+                    appNumber++; // Increment the appNumber variable by 1.
+                    if (appNumber == 1) // If the value of appNumber is 1:
+                        app1 = appointment.appointment.date.ToString(); // Store the date of the appointment in the app1 variable.
+                    if (appNumber == 2) // If the value of appNumber is 2:
+                        app2 = appointment.appointment.date.ToString(); // Store the date of the appointment in the app2 variable.
+                    if (appNumber == 3) // If the value of appNumber is 3:
+                        app3 = appointment.appointment.date.ToString(); // Store the date of the appointment in the app3 variable.
 
-                    appString = appointment.appointment.date.ToString();
-                    Console.WriteLine(appNumber + ": " + appString);
+                    appString = appointment.appointment.date.ToString(); // Store the date of the current appointment in the appString variable.
+                    Console.WriteLine(appNumber + ": " + appString); // Display the number of the current appointment followed by its date.
+
                 }
-                
+
             }
             
-            String choice = "";
-            while (!(choice.Equals("1") || choice.Equals("2") || choice.Equals("3")))
+            String choice = ""; // Initialice a string variable called "choice" to an empty string
+            while (!(choice.Equals("1") || choice.Equals("2") || choice.Equals("3"))) // Begin a while loop that will continue executing as long as the user's input is not equal to "1", "2", or "3".
             {
-                Console.WriteLine("Enter the number of your desired appointment from above.");
-                choice = Console.ReadLine();
+                Console.WriteLine("Enter the number of your desired appointment from above."); // Display a message asking the user to enter the number of their desired appointment.
+                choice = Console.ReadLine(); // Store the user's input in the "choice" variable.
 
 
-                if (choice.Equals("1"))
+                if (choice.Equals("1")) // Check if the user selected appointment 1.
                 {
-                    Console.WriteLine("Appointment booked for " + app1);
+                    Console.WriteLine("Appointment booked for " + app1); // Display a message saying that appointment 1 has been booked.
                 }
-                else if (choice.Equals("2"))
+                else if (choice.Equals("2")) // Check if the user selected appointment 2.
                 {
-                    Console.WriteLine("Appointment booked for " + app2);
+                    Console.WriteLine("Appointment booked for " + app2); // Display a message saying that appointment 2 has been booked.
                 }
-                else if (choice.Equals("3"))
+                else if (choice.Equals("3")) // Check if the user selected appointment 3.
                 {
-                    Console.WriteLine("Appointment booked for " + app3);
+                    Console.WriteLine("Appointment booked for " + app3); // Display a message saying that appointment 3 has been booked.
                 }
-                else Console.WriteLine("Invalid input.");
+                else Console.WriteLine("Invalid input."); // If the user's input was not "1", "2", or "3", display a message saying that the input was invalid.
             }
         }
     }
